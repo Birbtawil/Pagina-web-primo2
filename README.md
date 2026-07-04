@@ -27,12 +27,16 @@ que volver a correr `npm run build` para que `dist/output.css` quede al día.
 
 ## Imágenes
 
-Los 5 archivos en `assets/img/` (`image_573feb.png`, `image_574023.png`,
-`image_574046.png`, `image_57407f.png`, `image_57409f.png`) son **placeholders
-generados por código** (gradientes + texturas) que respetan la paleta de la
-tonalidad real de cada material (asfalto, aluminio, azul de construcción,
-madera, metal rojo). Sustitúyelos por las fotografías reales del cliente
-manteniendo el mismo nombre de archivo y no hace falta tocar ni el HTML ni el CSS.
+Los 5 archivos en `assets/img/` son fotos reales del cliente:
+
+- `image_573feb.png` — textura de tejas asfálticas (fondo del hero)
+- `image_574023.png` — instalación de canaletas
+- `image_574046.png` — techo azul en construcción (tarjeta destacada)
+- `image_57407f.png` — trabajador en techo de madera
+- `image_57409f.png` — techo metálico rojo
+
+Para reemplazar cualquiera por una versión nueva, basta con sobrescribir el
+archivo manteniendo el mismo nombre — el HTML y el CSS no necesitan cambios.
 
 ## Formulario de cotización
 
