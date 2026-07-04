@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CG Premier Builders | Exceptional Roofing Solutions for Colorado Homes</title>
+  <meta name="description" content="CG Premier Builders — licensed roofing contractors in Colorado. Roof replacement, repair, metal roofing, gutters and storm damage restoration. Get a free estimate today." />
+
+  <!-- Favicon: icono de tejado inline (SVG data-URI), acento ember de marca -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111418'/%3E%3Cpath d='M10 38 L32 16 L54 38' stroke='%23f2621c' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M18 34 V48 H46 V34' stroke='%239db4c9' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- CSS compilado de Tailwind (ver src/input.css + tailwind.config.js). Reconstruir con: npm run build -->
+  <link rel="stylesheet" href="dist/output.css" />
+</head>
+<body class="bg-charcoal-950 font-sans">
+
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-ember-500 focus:px-4 focus:py-2 focus:text-white">
+    Skip to main content
+  </a>
+
+  <!-- =======================================================================
+       1) GLOBAL HEADER — sticky + glassmorphism.
+       El fondo empieza casi transparente sobre el hero y JS (main.js) añade
+       la clase "is-scrolled" para oscurecerlo/enfocar el blur al hacer scroll,
+       reforzando la sensación de profundidad y capas.
+       ======================================================================= -->
+  <header id="site-header" class="fixed inset-x-0 top-0 z-50 transition-all duration-500">
+    <div class="glass-panel border-x-0 border-t-0 transition-all duration-500" id="header-panel">
+      <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 lg:px-10">
+
+        <!-- Logotipo: no se recibió archivo de logo, así que se construye en
+             código (SVG + wordmark) para poder sustituirlo fácilmente por el
+             logo oficial de CG Premier Builders el día que exista un asset. -->
+        <a href="#home" class="group flex items-center gap-3">
+          <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-ember-500 to-ember-700 shadow-glow">
+            <svg viewBox="0 0 24 24" class="h-6 w-6 text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12 12 4l9 8" />
+              <path d="M6 10.5V20h12v-9.5" />
+              <path d="M10 20v-6h4v6" />
+            </svg>
+          </span>
+          <span class="leading-tight">
+            <span class="block font-display text-lg font-extrabold tracking-tight text-white">
+              CG <span class="text-ember-500">PREMIER</span> BUILDERS
+            </span>
+            <span class="block text-[11px] font-semibold uppercase tracking-[0.3em] text-steel-300">
+              Roofing · Colorado
+            </span>
+          </span>
+        </a>
+
+        <!-- Navegación desktop -->
+        <nav class="hidden items-center gap-8 lg:flex" aria-label="Primary">
+          <a href="#services" class="text-sm font-semibold text-slate-200 transition-colors hover:text-ember-400">Services</a>
+          <a href="#reviews" class="text-sm font-semibold text-slate-200 transition-colors hover:text-ember-400">Reviews</a>
+          <a href="#quote" class="text-sm font-semibold text-slate-200 transition-colors hover:text-ember-400">Get a Quote</a>
+        </nav>
+
+        <!-- Contacto + CTA derecha -->
+        <div class="flex items-center gap-3 lg:gap-6">
+          <div class="hidden flex-col items-end xl:flex">
+            <a href="tel:+17195040857" class="flex items-center gap-2 text-sm font-bold text-white transition-colors hover:text-ember-400">
+              <svg viewBox="0 0 24 24" class="h-4 w-4 text-ember-500" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z"/></svg>
+              (719) 504-0857
+            </a>
+            <a href="mailto:info@cgpremierbuilders.com" class="text-xs font-medium text-steel-300 transition-colors hover:text-ember-400">
+              info@cgpremierbuilders.com
+            </a>
+          </div>
+          <a href="#quote" class="btn-primary hidden !px-5 !py-2.5 text-sm sm:inline-flex">
+            Get a Quote
+          </a>
+
+          <!-- Toggle menú móvil -->
+          <button id="menu-toggle" type="button" aria-controls="mobile-menu" aria-expanded="false" class="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white lg:hidden">
+            <span class="sr-only">Open menu</span>
+            <svg id="icon-menu" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <svg id="icon-close" viewBox="0 0 24 24" class="hidden h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Menú móvil desplegable -->
+      <div id="mobile-menu" class="hidden border-t border-white/10 px-6 py-6 lg:hidden">
+        <nav class="flex flex-col gap-4" aria-label="Mobile">
+          <a href="#services" class="text-base font-semibold text-slate-200">Services</a>
+          <a href="#reviews" class="text-base font-semibold text-slate-200">Reviews</a>
+          <a href="#quote" class="text-base font-semibold text-slate-200">Get a Quote</a>
+          <a href="tel:+17195040857" class="text-base font-bold text-ember-400">(719) 504-0857</a>
+          <a href="mailto:info@cgpremierbuilders.com" class="text-sm text-steel-300">info@cgpremierbuilders.com</a>
+          <a href="#quote" class="btn-primary mt-2 w-full">Get a Quote</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- =====================================================================
+         2) HERO SECTION — inmersivo, a pantalla completa.
+         Fondo: assets/img/image_573feb.png (textura de tejas asfálticas).
+         #hero-bg se desplaza a distinta velocidad que el scroll (parallax,
+         controlado por main.js) y lleva "scale-110" de margen para que el
+         parallax no descubra bordes vacíos. El overlay oscuro en capas
+         (gradiente + grano) es lo que permite que el H1 blanco tenga
+         contraste AAA sobre una foto de material de construcción.
+         ===================================================================== -->
+    <section id="home" class="relative isolate flex h-[100svh] min-h-[640px] w-full items-center overflow-hidden bg-charcoal-950">
+      <div
+        id="hero-bg"
+        class="absolute inset-0 -z-20 scale-110 bg-cover bg-center will-change-transform"
+        style="background-image:url('assets/img/image_573feb.png');"
+        aria-hidden="true"
+      ></div>
+      <div class="absolute inset-0 -z-10 bg-gradient-to-b from-charcoal-950/85 via-charcoal-950/70 to-charcoal-950"></div>
+      <div class="absolute inset-0 -z-10 bg-grain"></div>
+      <div class="pointer-events-none absolute -top-40 right-[-10%] -z-10 h-[36rem] w-[36rem] rounded-full bg-ember-600/20 blur-[140px]"></div>
+
+      <div class="mx-auto w-full max-w-7xl px-6 pt-24 lg:px-10">
+        <div class="max-w-3xl">
+          <p class="reveal section-eyebrow">Colorado Licensed &amp; Insured Roofing Contractor</p>
+
+          <h1 class="reveal font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Exceptional Roofing Solutions for Colorado Homes
+          </h1>
+
+          <p class="reveal mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
+            From storm-damage restoration to full roof replacements, CG Premier Builders delivers
+            precision craftsmanship and materials built to outlast Colorado's harshest weather —
+            backed by a crew that treats every home like their own.
+          </p>
+
+          <div class="reveal mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <a href="#quote" class="btn-primary text-base">
+              Get My Free Estimate
+              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a href="tel:+17195040857" class="btn-secondary text-base">
+              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z"/></svg>
+              (719) 504-0857
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Indicador de scroll animado -->
+      <a href="#trust" aria-label="Scroll down" class="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-slate-400 sm:flex">
+        <span class="text-[11px] font-semibold uppercase tracking-[0.3em]">Scroll</span>
+        <span class="flex h-9 w-6 items-start justify-center rounded-full border-2 border-slate-500/60 p-1">
+          <span class="h-2 w-1 animate-float rounded-full bg-ember-500"></span>
+        </span>
+      </a>
+    </section>
+
+    <!-- =====================================================================
+         3) TRUST BAR & REVIEWS (Social Proof)
+         ===================================================================== -->
+    <section id="trust" class="relative border-y border-white/[0.06] bg-charcoal-900 py-10">
+      <div class="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-6 sm:grid-cols-4 lg:px-10">
+        <div class="reveal flex flex-col items-center gap-2 text-center">
+          <svg viewBox="0 0 24 24" class="h-7 w-7 text-ember-500" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4 6v6c0 4.6 3.4 8.3 8 9 4.6-.7 8-4.4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+          <span class="text-xs font-semibold uppercase tracking-wide text-slate-300 sm:text-sm">Licensed &amp; Insured</span>
+        </div>
+        <div class="reveal flex flex-col items-center gap-2 text-center">
+          <svg viewBox="0 0 24 24" class="h-7 w-7 text-ember-500" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-6h6v6"/></svg>
+          <span class="text-xs font-semibold uppercase tracking-wide text-slate-300 sm:text-sm">Locally Owned in Colorado</span>
+        </div>
+        <div class="reveal flex flex-col items-center gap-2 text-center">
+          <svg viewBox="0 0 24 24" class="h-7 w-7 text-ember-500" fill="currentColor"><path d="M12 2 9.2 8.6 2 9.3l5.5 4.7L5.8 21 12 17.3 18.2 21l-1.7-7 5.5-4.7-7.2-.7Z"/></svg>
+          <span class="text-xs font-semibold uppercase tracking-wide text-slate-300 sm:text-sm">Highly Rated on Yelp &amp; Nextdoor</span>
+        </div>
+        <div class="reveal flex flex-col items-center gap-2 text-center">
+          <svg viewBox="0 0 24 24" class="h-7 w-7 text-ember-500" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12h6M9 16h6M9 8h6M5 21h14a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1Z"/></svg>
+          <span class="text-xs font-semibold uppercase tracking-wide text-slate-300 sm:text-sm">Free, No-Obligation Estimates</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews" class="relative bg-charcoal-950 py-24 sm:py-32">
+      <div class="mx-auto max-w-7xl px-6 lg:px-10">
+        <div class="reveal mx-auto max-w-2xl text-center">
+          <p class="section-eyebrow mx-auto">What Colorado Homeowners Say</p>
+          <h2 class="font-display text-3xl font-extrabold text-white sm:text-4xl">Trusted for Quality, Respected for Craft</h2>
+          <p class="mt-4 text-slate-400">
+            A sample of the feedback in the spirit of what homeowners share about our crews on Yelp and
+            Nextdoor. Read the full, unedited reviews directly on their profiles below.
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <!-- Testimonio 1 -->
+          <blockquote class="reveal card-deep flex h-full flex-col p-8">
+            <div class="flex items-center gap-1 text-ember-500" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
+              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
+              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
+              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
+              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
+            </div>
+            <p class="mt-5 flex-1 text-slate-300">
+              &ldquo;From the first inspection to the final walkthrough, the crew was professional, on time,
+              and left our yard spotless. You can tell they take real pride in the work.&rdquo;
+            </p>
+            <footer class="mt-6 flex items-center justify-between border-t border-white/[0.06] pt-4">
+              <div>
+                <p class="font-semibold text-white">Michael R.</p>
+                <p class="text-xs text-slate-500">Colorado Springs, CO</p>
+              </div>
+              <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-slate-300">Yelp</span>
+            </footer>
+          </blockquote>
+
+          <!-- Testimonio 2 -->
+          <blockquote class="reveal card-deep flex h-full flex-col p-8">
+            <div class="flex items-center gap-1 text-ember-500" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
+              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
+              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
+              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
+              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
+            </div>
+            <p class="mt-5 flex-1 text-slate-300">
+              &ldquo;We had hail damage after the spring storms and CG Premier handled the entire insurance
+              process for us. Clear communication every single step of the way.&rdquo;
+            </p>
+            <footer class="mt-6 flex items-center justify-between border-t border-white/[0.06] pt-4">
+              <div>
+                <p class="font-semibold text-white">Sarah T.</p>
+                <p class="text-xs text-slate-500">Colorado Springs, CO</p>
+              </div>
+              <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-slate-300">Nextdoor</span>
+            </footer>
+          </blockquote>
+
+          <!-- Testimonio 3 -->
+          <blockquote class="reveal card-deep flex h-full flex-col p-8 sm:col-span-2 lg:col-span-1">
+            <div class="flex items-center gap-1 text-ember-500" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
+              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
+              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
+              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
+              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
+            </div>
+            <p class="mt-5 flex-1 text-slate-300">
+              &ldquo;Fair pricing, quality materials, and a crew that actually showed up when they said
+              they would. Our new roof looks incredible.&rdquo;
+            </p>
+            <footer class="mt-6 flex items-center justify-between border-t border-white/[0.06] pt-4">
+              <div>
+                <p class="font-semibold text-white">David K.</p>
+                <p class="text-xs text-slate-500">Monument, CO</p>
+              </div>
+              <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-slate-300">Yelp</span>
+            </footer>
+          </blockquote>
+        </div>
+
+        <div class="reveal mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <a href="https://www.yelp.com/biz/cg-premier-builders-colorado-springs" target="_blank" rel="noopener noreferrer" class="btn-secondary !px-6 !py-3 text-sm">
+            Read Reviews on Yelp
+          </a>
+          <a href="https://nextdoor.com/pages/cg-premier-builders-poland-oh/" target="_blank" rel="noopener noreferrer" class="btn-secondary !px-6 !py-3 text-sm">
+            Read Recommendations on Nextdoor
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         4) SERVICES — Deep Grid
+         Bento grid con las 4 fotos reales de trabajos entregadas por el
+         cliente. Cada tarjeta-imagen lleva overlay degradado + icono + CTA
+         que precarga el desplegable "Type of service needed" del formulario
+         (ver data-service y main.js).
+         ===================================================================== -->
+    <section id="services" class="relative bg-charcoal-900 py-24 sm:py-32">
+      <div class="mx-auto max-w-7xl px-6 lg:px-10">
+        <div class="reveal mx-auto max-w-2xl text-center">
+          <p class="section-eyebrow mx-auto">What We Do</p>
+          <h2 class="font-display text-3xl font-extrabold text-white sm:text-4xl">Built to Withstand Colorado Weather</h2>
+          <p class="mt-4 text-slate-400">
+            Every project starts with a thorough inspection and ends with a roof system engineered for
+            hail, wind, and heavy snow loads — installed by crews who stand behind their craftsmanship.
+          </p>
+        </div>
+
+        <div class="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+          <!-- Tarjeta destacada — assets/img/image_574046.png (techo azul en construcción) -->
+          <article class="reveal card-deep group relative flex min-h-[22rem] flex-col justify-end overflow-hidden lg:col-span-2">
+            <img src="assets/img/image_574046.png" alt="New roof installation in progress on a Colorado home" class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/50 to-transparent"></div>
+            <div class="relative p-8">
+              <span class="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-ember-500/90 text-white shadow-glow">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M6 10.5V20h12v-9.5"/></svg>
+              </span>
+              <h3 class="font-display text-2xl font-bold text-white">New Roof Installation &amp; Replacement</h3>
+              <p class="mt-2 max-w-md text-slate-300">Full tear-offs and new builds using premium architectural shingles engineered for Colorado's climate.</p>
+              <button type="button" data-service="Roof Replacement" class="quote-trigger mt-4 inline-flex items-center gap-2 text-sm font-bold text-ember-400 transition-colors hover:text-ember-300">
+                Get a quote for this
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </article>
+
+          <!-- assets/img/image_57409f.png (techo metálico rojo) -->
+          <article class="reveal card-deep group relative flex min-h-[22rem] flex-col justify-end overflow-hidden">
+            <img src="assets/img/image_57409f.png" alt="Standing-seam red metal roof detail" class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/50 to-transparent"></div>
+            <div class="relative p-8">
+              <span class="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-ember-500/90 text-white shadow-glow">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17V9l8-5 8 5v8M4 17l8 5 8-5M4 17l8-5 8 5"/></svg>
+              </span>
+              <h3 class="font-display text-xl font-bold text-white">Metal Roofing Systems</h3>
+              <p class="mt-2 text-slate-300">Standing-seam &amp; stone-coated steel for maximum durability and curb appeal.</p>
+              <button type="button" data-service="Metal Roofing" class="quote-trigger mt-4 inline-flex items-center gap-2 text-sm font-bold text-ember-400 transition-colors hover:text-ember-300">
+                Get a quote for this
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </article>
+
+          <!-- assets/img/image_574023.png (instalación de canaletas) -->
+          <article class="reveal card-deep group relative flex min-h-[22rem] flex-col justify-end overflow-hidden">
+            <img src="assets/img/image_574023.png" alt="Seamless gutter installation along a roofline" class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/50 to-transparent"></div>
+            <div class="relative p-8">
+              <span class="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-ember-500/90 text-white shadow-glow">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M6 6v14h4V6M14 6v14h4V6"/></svg>
+              </span>
+              <h3 class="font-display text-xl font-bold text-white">Gutter Installation &amp; Repair</h3>
+              <p class="mt-2 text-slate-300">Seamless gutters and downspouts sized to handle Colorado downpours and snowmelt.</p>
+              <button type="button" data-service="Gutter Installation" class="quote-trigger mt-4 inline-flex items-center gap-2 text-sm font-bold text-ember-400 transition-colors hover:text-ember-300">
+                Get a quote for this
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </article>
+
+          <!-- assets/img/image_57407f.png (trabajador en techo de madera) -->
+          <article class="reveal card-deep group relative flex min-h-[22rem] flex-col justify-end overflow-hidden">
+            <img src="assets/img/image_57407f.png" alt="Roofing technician working on wood roof decking" class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/50 to-transparent"></div>
+            <div class="relative p-8">
+              <span class="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-ember-500/90 text-white shadow-glow">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0-1.4 0l-6 6a1 1 0 0 0 0 1.4l3 3a1 1 0 0 0 1.4 0l6-6a1 1 0 0 0 0-1.4l-3-3Z"/><path d="m9 15-4 4M5 19H3v-2"/></svg>
+              </span>
+              <h3 class="font-display text-xl font-bold text-white">Roof Repair &amp; Maintenance</h3>
+              <p class="mt-2 text-slate-300">Leak repair, deck replacement, and tune-ups that extend the life of your existing roof.</p>
+              <button type="button" data-service="Roof Repair" class="quote-trigger mt-4 inline-flex items-center gap-2 text-sm font-bold text-ember-400 transition-colors hover:text-ember-300">
+                Get a quote for this
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </article>
+
+          <!-- Sin foto asignada por el cliente: tarjeta de icono con degradado de marca -->
+          <article class="reveal card-deep group relative flex min-h-[22rem] flex-col justify-end overflow-hidden bg-gradient-to-br from-charcoal-700 to-charcoal-800">
+            <div class="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-steel-500/20 blur-3xl transition-all duration-700 group-hover:bg-ember-500/20"></div>
+            <div class="relative p-8">
+              <span class="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-steel-300">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15a4 4 0 0 1 4-4 5 5 0 0 1 9.6-1.5A4.5 4.5 0 0 1 20 18H6a3 3 0 0 1-3-3Z"/><path d="M13 13l-2 3h3l-2 3"/></svg>
+              </span>
+              <h3 class="font-display text-xl font-bold text-white">Storm &amp; Hail Damage Restoration</h3>
+              <p class="mt-2 text-slate-300">Free damage assessments and full insurance-claim assistance from inspection to final payout.</p>
+              <button type="button" data-service="Storm/Hail Damage & Insurance Claim" class="quote-trigger mt-4 inline-flex items-center gap-2 text-sm font-bold text-ember-400 transition-colors hover:text-ember-300">
+                Get a quote for this
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </article>
+
+          <!-- Banner ancho — Commercial Roofing (sin foto asignada) -->
+          <article class="reveal card-deep group relative flex min-h-[11rem] flex-col justify-center overflow-hidden bg-gradient-to-r from-charcoal-800 via-charcoal-800 to-steel-600/30 lg:col-span-3">
+            <div class="relative flex flex-col items-start justify-between gap-6 p-8 sm:flex-row sm:items-center">
+              <div class="flex items-center gap-5">
+                <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-white/10 text-steel-300">
+                  <svg viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M6 21V6l6-3 6 3v15M9 21v-5h6v5M9 10h.01M9 13h.01M15 10h.01M15 13h.01"/></svg>
+                </span>
+                <div>
+                  <h3 class="font-display text-xl font-bold text-white sm:text-2xl">Commercial Roofing Solutions</h3>
+                  <p class="mt-1 max-w-lg text-slate-300">Low-slope membranes, coatings, and multi-family roof programs backed by real project management.</p>
+                </div>
+              </div>
+              <button type="button" data-service="Commercial Roofing" class="quote-trigger btn-secondary shrink-0 !px-6 !py-3 text-sm">
+                Request Commercial Quote
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         5) LEAD CAPTURE WINDOW — formulario de cotización
+         Panel oscuro elevado (glass-panel + shadow-deep-lg) para que
+         contraste con el fondo aún más oscuro de la sección, generando la
+         sensación de "ventana" flotante que pide el brief.
+         ===================================================================== -->
+    <section id="quote" class="relative isolate overflow-hidden bg-charcoal-950 py-24 sm:py-32">
+      <div class="pointer-events-none absolute left-1/2 top-0 -z-10 h-[40rem] w-[60rem] -translate-x-1/2 rounded-full bg-ember-600/10 blur-[160px]"></div>
+
+      <div class="relative mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 lg:grid-cols-5 lg:px-10">
+
+        <!-- Columna informativa -->
+        <div class="reveal lg:col-span-2">
+          <p class="section-eyebrow">Free Estimate</p>
+          <h2 class="font-display text-3xl font-extrabold text-white sm:text-4xl">Get Your Free, No-Obligation Estimate</h2>
+          <p class="mt-4 text-slate-400">
+            Tell us a bit about your property and project. A project advisor will follow up — usually
+            within one business day — to schedule your on-site inspection.
+          </p>
+
+          <ul class="mt-8 space-y-5">
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-ember-500/15 text-ember-400">
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+              </span>
+              <span class="text-slate-300">We review your details and confirm by phone or email.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-ember-500/15 text-ember-400">
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+              </span>
+              <span class="text-slate-300">A licensed inspector visits your property, on your schedule.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-ember-500/15 text-ember-400">
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+              </span>
+              <span class="text-slate-300">You receive a clear, itemized, no-obligation estimate.</span>
+            </li>
+          </ul>
+
+          <div class="glass-panel mt-10 rounded-2xl p-6">
+            <p class="text-sm font-semibold uppercase tracking-wide text-steel-300">Prefer to talk now?</p>
+            <a href="tel:+17195040857" class="mt-2 block text-2xl font-extrabold text-white transition-colors hover:text-ember-400">(719) 504-0857</a>
+            <a href="mailto:info@cgpremierbuilders.com" class="mt-1 block text-sm text-slate-400 transition-colors hover:text-ember-400">info@cgpremierbuilders.com</a>
+          </div>
+        </div>
+
+        <!-- Formulario -->
+        <div class="reveal lg:col-span-3">
+          <div class="glass-panel rounded-3xl p-6 shadow-deep-lg sm:p-10">
+
+            <form id="quote-form" class="space-y-6" novalidate>
+              <!-- data-endpoint: sustituir por la URL real del backend/servicio
+                   de formularios (API propia, Formspree, Zapier, etc.) antes
+                   de publicar. Sin backend configurado, el formulario valida
+                   en cliente y muestra una confirmación local. -->
+              <div data-endpoint="">
+
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                  <div>
+                    <label for="firstName" class="field-label">First Name <span class="text-ember-500">*</span></label>
+                    <input id="firstName" name="firstName" type="text" required autocomplete="given-name" class="field-input" placeholder="Jane" />
+                    <p class="field-error mt-1.5 hidden text-xs font-medium text-red-400">Please enter your first name.</p>
+                  </div>
+                  <div>
+                    <label for="lastName" class="field-label">Last Name <span class="text-ember-500">*</span></label>
+                    <input id="lastName" name="lastName" type="text" required autocomplete="family-name" class="field-input" placeholder="Doe" />
+                    <p class="field-error mt-1.5 hidden text-xs font-medium text-red-400">Please enter your last name.</p>
+                  </div>
+                </div>
+
+                <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+                  <div>
+                    <label for="email" class="field-label">Email <span class="text-ember-500">*</span></label>
+                    <input id="email" name="email" type="email" required autocomplete="email" class="field-input" placeholder="jane.doe@email.com" />
+                    <p class="field-error mt-1.5 hidden text-xs font-medium text-red-400">Please enter a valid email address.</p>
+                  </div>
+                  <div>
+                    <label for="phone" class="field-label">Phone (include +1) <span class="text-ember-500">*</span></label>
+                    <input id="phone" name="phone" type="tel" required inputmode="tel" class="field-input" placeholder="+1 (719) 555-0123" />
+                    <p class="field-error mt-1.5 hidden text-xs font-medium text-red-400">Please enter a valid phone number, e.g. +1 (719) 555-0123.</p>
+                  </div>
+                </div>
+
+                <div class="mt-6">
+                  <label for="address" class="field-label">Address</label>
+                  <input id="address" name="address" type="text" autocomplete="street-address" class="field-input" placeholder="123 Pikes Peak Ave, Colorado Springs, CO" />
+                </div>
+
+                <div class="mt-6">
+                  <span class="field-label">Property Type</span>
+                  <div class="flex flex-wrap gap-4">
+                    <label class="flex cursor-pointer items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 transition-colors has-[:checked]:border-ember-500/60 has-[:checked]:bg-ember-500/10">
+                      <input type="checkbox" name="propertyType" value="Residential" class="h-4 w-4 rounded border-white/20 bg-transparent accent-ember-500 focus:ring-ember-500/40" />
+                      <span class="text-sm font-medium text-slate-200">Residential</span>
+                    </label>
+                    <label class="flex cursor-pointer items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 transition-colors has-[:checked]:border-ember-500/60 has-[:checked]:bg-ember-500/10">
+                      <input type="checkbox" name="propertyType" value="Commercial" class="h-4 w-4 rounded border-white/20 bg-transparent accent-ember-500 focus:ring-ember-500/40" />
+                      <span class="text-sm font-medium text-slate-200">Commercial</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="mt-6">
+                  <label for="serviceType" class="field-label">Type of Service Needed</label>
+                  <select id="serviceType" name="serviceType" class="field-select">
+                    <option value="">Select a service…</option>
+                    <option>Roof Replacement</option>
+                    <option>Roof Repair</option>
+                    <option>Metal Roofing</option>
+                    <option>Asphalt Shingle Roofing</option>
+                    <option>Gutter Installation</option>
+                    <option>Storm/Hail Damage & Insurance Claim</option>
+                    <option>Commercial Roofing</option>
+                    <option>Inspection / Estimate Only</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+
+                <div class="mt-6">
+                  <label for="subject" class="field-label">Subject <span class="font-normal text-slate-500">(Optional)</span></label>
+                  <input id="subject" name="subject" type="text" class="field-input" placeholder="e.g. Leak after last week's storm" />
+                </div>
+
+                <div class="mt-6">
+                  <label for="message" class="field-label">Message <span class="font-normal text-slate-500">(Optional)</span></label>
+                  <textarea id="message" name="message" rows="4" class="field-input resize-none" placeholder="Include any specific information that you want us to know."></textarea>
+                </div>
+
+                <fieldset class="mt-6 rounded-xl border border-white/10 bg-white/[0.02] p-5">
+                  <legend class="field-label px-1">
+                    If you would like to be contacted at a specific date/time, please specify
+                    <span class="font-normal text-slate-500">(Optional)</span>
+                  </legend>
+                  <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                    <div>
+                      <label for="pref-month" class="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-slate-400">Month</label>
+                      <select id="pref-month" name="prefMonth" class="field-select !py-3 text-sm"></select>
+                    </div>
+                    <div>
+                      <label for="pref-day" class="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-slate-400">Day</label>
+                      <select id="pref-day" name="prefDay" class="field-select !py-3 text-sm"></select>
+                    </div>
+                    <div>
+                      <label for="pref-year" class="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-slate-400">Year</label>
+                      <select id="pref-year" name="prefYear" class="field-select !py-3 text-sm"></select>
+                    </div>
+                    <div>
+                      <label for="pref-time" class="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-slate-400">Time</label>
+                      <select id="pref-time" name="prefTime" class="field-select !py-3 text-sm"></select>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <p class="form-status mt-6 hidden rounded-xl px-4 py-3 text-sm font-medium" role="status"></p>
+
+                <button type="submit" class="btn-primary mt-8 w-full text-base">
+                  Submit Request
+                </button>
+
+                <p class="mt-4 text-center text-xs text-slate-500">
+                  By submitting, you agree to be contacted about your project. See our
+                  <a href="#data-policy" class="underline decoration-dotted underline-offset-2 hover:text-slate-300">data policy</a> below.
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       6) GLOBAL FOOTER & DATA POLICY
+       ========================================================================= -->
+  <footer class="border-t border-white/[0.06] bg-charcoal-950">
+    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10">
+      <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
+
+        <div>
+          <a href="#home" class="flex items-center gap-3">
+            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-ember-500 to-ember-700">
+              <svg viewBox="0 0 24 24" class="h-5 w-5 text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M6 10.5V20h12v-9.5"/><path d="M10 20v-6h4v6"/></svg>
+            </span>
+            <span class="font-display text-base font-extrabold text-white">CG <span class="text-ember-500">PREMIER</span> BUILDERS</span>
+          </a>
+          <p class="mt-4 text-sm leading-relaxed text-slate-400">
+            Licensed roofing contractor serving Colorado Springs and the surrounding Front Range with
+            residential and commercial roofing, gutters, and storm restoration.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold uppercase tracking-wide text-white">Contact</h4>
+          <ul class="mt-4 space-y-3 text-sm text-slate-400">
+            <li><a href="tel:+17195040857" class="transition-colors hover:text-ember-400">(719) 504-0857</a></li>
+            <li><a href="mailto:info@cgpremierbuilders.com" class="transition-colors hover:text-ember-400">info@cgpremierbuilders.com</a></li>
+            <li>Colorado Springs, CO &amp; the Front Range</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold uppercase tracking-wide text-white">Quick Links</h4>
+          <ul class="mt-4 space-y-3 text-sm text-slate-400">
+            <li><a href="#home" class="transition-colors hover:text-ember-400">Home</a></li>
+            <li><a href="#services" class="transition-colors hover:text-ember-400">Services</a></li>
+            <li><a href="#reviews" class="transition-colors hover:text-ember-400">Reviews</a></li>
+            <li><a href="#quote" class="transition-colors hover:text-ember-400">Get a Quote</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold uppercase tracking-wide text-white">Find Us</h4>
+          <ul class="mt-4 space-y-3 text-sm text-slate-400">
+            <li><a href="https://www.yelp.com/biz/cg-premier-builders-colorado-springs" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-ember-400">Yelp</a></li>
+            <li><a href="https://nextdoor.com/pages/cg-premier-builders-poland-oh/" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-ember-400">Nextdoor</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Data Policy: obligatorio según el brief -->
+      <div id="data-policy" class="mt-14 rounded-2xl border border-white/10 bg-white/[0.02] p-6 text-xs leading-relaxed text-slate-500 sm:text-sm">
+        <p class="mb-2 font-bold uppercase tracking-wide text-slate-400">Data &amp; Privacy Policy</p>
+        <p>
+          Your privacy matters to us. The information submitted via this form is encrypted in transit and
+          strictly used to provide you with an accurate estimate and to communicate regarding your
+          roofing project. We do not sell or share your personal data with third parties.
+        </p>
+      </div>
+
+      <div class="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/[0.06] pt-8 text-xs text-slate-500 sm:flex-row">
+        <p>&copy; <span id="year"></span> CG Premier Builders. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#data-policy" class="hover:text-slate-300">Privacy Policy</a>
+          <a href="#data-policy" class="hover:text-slate-300">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botón flotante "volver arriba" / CTA persistente -->
+  <button id="back-to-top" type="button" aria-label="Back to top" class="fixed bottom-6 right-6 z-40 flex h-12 w-12 translate-y-20 items-center justify-center rounded-full bg-ember-500 text-white opacity-0 shadow-deep-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-ember-400">
+    <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

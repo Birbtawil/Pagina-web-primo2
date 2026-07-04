@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-charcoal-950 text-slate-200 antialiased;
+  }
+  ::selection {
+    @apply bg-ember-500/40 text-white;
+  }
+}
+
+@layer components {
+  /* ---------------------------------------------------------------------
+   * Scroll-reveal: estado inicial oculto; JS (IntersectionObserver) añade
+   * ".is-visible" cuando el elemento entra en el viewport. Sin JS (o si
+   * falla), el CSS de abajo garantiza fallback visible tras 2.5s.
+   * --------------------------------------------------------------------- */
+  .reveal {
+    @apply opacity-0 translate-y-8 transition-[opacity,transform] duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)];
+  }
+  .reveal.is-visible {
+    @apply opacity-100 translate-y-0;
+  }
+  .reveal-noscript-fallback {
+    animation: fadeInUp 1s ease 2.5s both;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ember-500 px-8 py-4
+           font-semibold tracking-wide text-white shadow-glow
+           transition-all duration-300 ease-out
+           hover:-translate-y-0.5 hover:bg-ember-400 hover:shadow-deep-lg
+           active:translate-y-0 active:bg-ember-600
+           focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ember-400;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4
+           font-semibold tracking-wide text-white backdrop-blur-sm
+           transition-all duration-300 ease-out
+           hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/10;
+  }
+
+  .glass-panel {
+    @apply border border-white/10 bg-white/[0.04] backdrop-blur-xl;
+  }
+
+  .card-deep {
+    @apply relative overflow-hidden rounded-2xl border border-white/[0.06] bg-charcoal-800
+           shadow-deep transition-all duration-500 ease-out
+           hover:-translate-y-2 hover:border-ember-500/30 hover:shadow-deep-lg;
+  }
+
+  .section-eyebrow {
+    @apply mb-4 inline-flex items-center gap-2 rounded-full border border-ember-500/30 bg-ember-500/10
+           px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-ember-400;
+  }
+
+  .field-label {
+    @apply mb-2 block text-sm font-semibold tracking-wide text-slate-300;
+  }
+
+  .field-input {
+    @apply w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-slate-100 placeholder:text-slate-500
+           outline-none transition-colors duration-200
+           focus:border-ember-500/60 focus:bg-white/[0.06] focus:ring-2 focus:ring-ember-500/20;
+  }
+
+  .field-select {
+    @apply field-input appearance-none bg-no-repeat pr-10;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="%239db4c9"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>');
+    background-size: 20px;
+    background-position: right 1rem center;
+  }
+}
