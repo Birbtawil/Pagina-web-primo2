@@ -15,8 +15,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Reduce el tamaño base de todo el texto (rem) al 90% para un layout más compacto */
-    font-size: 90%;
+    /* Reduce el tamaño base de todo el texto (rem) un 10% adicional sobre el 90% previo (81% acumulado) */
+    font-size: 81%;
   }
   body {
     @apply bg-charcoal-950 text-slate-100 antialiased;
@@ -60,6 +60,18 @@
 
   .glass-panel {
     @apply border border-white/10 bg-white/[0.04] backdrop-blur-xl;
+  }
+
+  /* Scrim oscuro reforzado sobre las fotos de las tarjetas de servicio:
+   * une un degradado direccional (más opaco de lo original) con una capa
+   * plana semitransparente, para que el texto claro quede siempre legible
+   * sin depender del brillo de la foto de fondo. */
+  .card-photo-scrim {
+    @apply absolute inset-0 bg-charcoal-950/55;
+    background-image: linear-gradient(to top, rgba(11, 13, 16, 0.95) 0%, rgba(11, 13, 16, 0.78) 45%, rgba(11, 13, 16, 0.45) 75%, rgba(11, 13, 16, 0.35) 100%);
+  }
+  .card-text-shadow {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
   }
 
   .card-deep {
