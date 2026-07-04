@@ -15,9 +15,11 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Reduce el tamaño base de todo el texto (rem) al 90% para un layout más compacto */
+    font-size: 90%;
   }
   body {
-    @apply bg-charcoal-950 text-slate-200 antialiased;
+    @apply bg-charcoal-950 text-slate-100 antialiased;
   }
   ::selection {
     @apply bg-ember-500/40 text-white;
@@ -162,11 +164,11 @@
   }
 
   .field-label {
-    @apply mb-2 block text-sm font-semibold tracking-wide text-slate-300;
+    @apply mb-2 block text-sm font-semibold tracking-wide text-slate-200;
   }
 
   .field-input {
-    @apply w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-slate-100 placeholder:text-slate-500
+    @apply w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-slate-100 placeholder:text-slate-400
            outline-none transition-colors duration-200
            focus:border-ember-500/60 focus:bg-white/[0.06] focus:ring-2 focus:ring-ember-500/20;
   }
