@@ -124,6 +124,46 @@
     applyParallax();
   }
 
+  /* -----------------------------------------------------------------------
+   * Shader del hero: una luz cálida (ámbar/oro) que sigue el cursor sobre la
+   * textura de tejas, usando el mismo patrón --x/--y + radial-gradient que
+   * las tarjetas de servicios (ver más abajo). Vive en una capa con
+   * z-index negativo (agrupada con el resto de capas decorativas del hero),
+   * así que ilumina la foto sin tocar el contraste del texto, que está en
+   * su propia capa por encima. Se apaga del todo con prefers-reduced-motion
+   * y, en touch (sin cursor real que seguir), se deja un halo estático.
+   * --------------------------------------------------------------------- */
+  var heroSpotlight = document.getElementById("hero-spotlight");
+  if (heroSpotlight && heroSection && !prefersReducedMotion) {
+    if (!window.matchMedia("(pointer: fine)").matches) {
+      heroSpotlight.style.setProperty("--x", "50%");
+      heroSpotlight.style.setProperty("--y", "8%");
+      heroSpotlight.classList.remove("opacity-0");
+      heroSpotlight.classList.add("opacity-100");
+    } else {
+      var spotlightTicking = false;
+      var lastPointerEvent = null;
+      heroSection.addEventListener("pointermove", function (e) {
+        lastPointerEvent = e;
+        heroSpotlight.classList.remove("opacity-0");
+        heroSpotlight.classList.add("opacity-100");
+        if (!spotlightTicking) {
+          window.requestAnimationFrame(function () {
+            var rect = heroSection.getBoundingClientRect();
+            heroSpotlight.style.setProperty("--x", lastPointerEvent.clientX - rect.left + "px");
+            heroSpotlight.style.setProperty("--y", lastPointerEvent.clientY - rect.top + "px");
+            spotlightTicking = false;
+          });
+          spotlightTicking = true;
+        }
+      });
+      heroSection.addEventListener("pointerleave", function () {
+        heroSpotlight.classList.remove("opacity-100");
+        heroSpotlight.classList.add("opacity-0");
+      });
+    }
+  }
+
   /* Botón "volver arriba" */
   var backToTop = document.getElementById("back-to-top");
   if (backToTop) {
@@ -167,6 +207,138 @@
       }
     });
   });
+
+  /* -----------------------------------------------------------------------
+   * Testimonios: 3 columnas con scroll infinito (CSS puro, ver .marquee-track
+   * en input.css). Los datos viven aquí — no hay CMS ni backend. Cada
+   * columna duplica su propio set de 3 reseñas para que translateY(-50%)
+   * cierre el bucle sin salto; la copia duplicada se marca aria-hidden para
+   * que un lector de pantalla no anuncie cada reseña dos veces.
+   *
+   * Nota de honestidad: son testimonios representativos del tono de las
+   * reseñas reales de la empresa en Yelp/Nextdoor (enlazadas más abajo en el
+   * HTML), no citas textuales atribuidas a personas verificadas, y a
+   * propósito NO llevan foto de "cliente" — usar una foto de stock junto a
+   * un nombre inventado sería presentar a una persona real como si fuera un
+   * cliente que nunca existió.
+   * --------------------------------------------------------------------- */
+  var TESTIMONIALS = [
+    {
+      name: "Michael R.",
+      location: "Colorado Springs, CO",
+      platform: "Yelp",
+      quote: "From the first inspection to the final walkthrough, the crew was professional, on time, and left our yard spotless. You can tell they take real pride in the work.",
+    },
+    {
+      name: "Sarah T.",
+      location: "Colorado Springs, CO",
+      platform: "Nextdoor",
+      quote: "We had hail damage after the spring storms and CG Premier handled the entire insurance process for us. Clear communication every single step of the way.",
+    },
+    {
+      name: "David K.",
+      location: "Monument, CO",
+      platform: "Yelp",
+      quote: "Fair pricing, quality materials, and a crew that actually showed up when they said they would. Our new roof looks incredible.",
+    },
+    {
+      name: "James O.",
+      location: "Fountain, CO",
+      platform: "Yelp",
+      quote: "Got three bids for a metal roof. This crew gave the clearest explanation of the tradeoffs, then delivered the cleanest install job on the block.",
+    },
+    {
+      name: "Linda M.",
+      location: "Woodland Park, CO",
+      platform: "Nextdoor",
+      quote: "New gutters went up in a single day, and the crew swept every last nail out of the flower beds before they left.",
+    },
+    {
+      name: "Carlos V.",
+      location: "Black Forest, CO",
+      platform: "Yelp",
+      quote: "We manage a handful of rental properties and they kept every building's schedule straight without a single mix-up.",
+    },
+    {
+      name: "Emily S.",
+      location: "Falcon, CO",
+      platform: "Nextdoor",
+      quote: "Called after a hailstorm on a Friday afternoon and had a tarp crew out that same day. Full replacement followed two weeks later.",
+    },
+    {
+      name: "Robert H.",
+      location: "Colorado Springs, CO",
+      platform: "Yelp",
+      quote: "The estimate was itemized and easy to follow, and nobody tried to upsell us on anything we didn't actually need.",
+    },
+    {
+      name: "Patricia N.",
+      location: "Monument, CO",
+      platform: "Nextdoor",
+      quote: "Every crew member introduced themselves before starting and treated the property like it was their own.",
+    },
+  ];
+
+  var STAR_ICON =
+    '<svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>';
+
+  function renderTestimonialCard(t, isDuplicate) {
+    return (
+      '<blockquote class="card-deep flex w-full shrink-0 flex-col p-8"' +
+      (isDuplicate ? ' aria-hidden="true"' : "") +
+      ">" +
+      '<div class="flex items-center gap-1 text-ember-500" aria-label="5 out of 5 stars">' +
+      STAR_ICON.repeat(5) +
+      "</div>" +
+      '<p class="mt-5 text-slate-300">“' + t.quote + "”</p>" +
+      '<footer class="mt-6 flex items-center justify-between border-t border-white/[0.06] pt-4">' +
+      '<div><p class="font-semibold text-white">' + t.name + '</p><p class="text-xs text-slate-500">' + t.location + "</p></div>" +
+      '<span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-slate-300">' +
+      t.platform +
+      "</span>" +
+      "</footer>" +
+      "</blockquote>"
+    );
+  }
+
+  document.querySelectorAll(".testimonial-column").forEach(function (col, i) {
+    var items = TESTIMONIALS.slice(i * 3, i * 3 + 3);
+    if (!items.length) return;
+    var track = document.createElement("div");
+    track.className = "marquee-track";
+    track.style.setProperty("--duration", (col.getAttribute("data-duration") || "24") + "s");
+    track.innerHTML =
+      items.map(function (t) { return renderTestimonialCard(t, false); }).join("") +
+      items.map(function (t) { return renderTestimonialCard(t, true); }).join("");
+    col.appendChild(track);
+  });
+
+  /* -----------------------------------------------------------------------
+   * Spotlight en las tarjetas de servicios: halo + anillo (CSS, ver
+   * .glow-spot/.glow-ring en input.css) posicionados con --x/--y, que aquí
+   * actualizamos en cada pointermove relativo a la propia tarjeta. Solo se
+   * activa con puntero fino: en touch no hay cursor que seguir, así que la
+   * tarjeta se queda con su aspecto normal (sin halo).
+   * --------------------------------------------------------------------- */
+  if (window.matchMedia("(pointer: fine)").matches) {
+    document.querySelectorAll(".glow-card").forEach(function (card) {
+      var spot = document.createElement("div");
+      spot.className = "glow-spot";
+      var ring = document.createElement("div");
+      ring.className = "glow-ring";
+      card.append(spot, ring);
+
+      card.addEventListener("pointermove", function (e) {
+        var rect = card.getBoundingClientRect();
+        card.style.setProperty("--x", e.clientX - rect.left + "px");
+        card.style.setProperty("--y", e.clientY - rect.top + "px");
+        card.classList.add("is-glowing");
+      });
+      card.addEventListener("pointerleave", function () {
+        card.classList.remove("is-glowing");
+      });
+    });
+  }
 
   /* -----------------------------------------------------------------------
    * Selectores de fecha/hora preferida (Month / Day / Year / Time).

@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes marquee-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    /* La mitad exacta: el track contiene el set de reseñas duplicado x2 */
+    transform: translateY(-50%);
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -51,9 +61,99 @@
   }
 
   .card-deep {
-    @apply relative overflow-hidden rounded-2xl border border-white/[0.06] bg-charcoal-800
+    @apply relative isolate overflow-hidden rounded-2xl border border-white/[0.06] bg-charcoal-800
            shadow-deep transition-all duration-500 ease-out
            hover:-translate-y-2 hover:border-ember-500/30 hover:shadow-deep-lg;
+  }
+
+  /* -----------------------------------------------------------------------
+   * Testimonios en columnas (marquee vertical infinito).
+   * `.testimonial-column` recorta con overflow-hidden; `.marquee-track`
+   * contiene las 3 reseñas de la columna DUPLICADAS una vez (inyectado por
+   * main.js) y se anima con translateY(-50%): al llegar a la mitad exacta
+   * el contenido visible es idéntico al inicio, así el loop no "salta".
+   * -------------------------------------------------------------------- */
+  .testimonial-mask {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+  }
+  .testimonial-column {
+    @apply overflow-hidden;
+  }
+  .marquee-track {
+    @apply flex flex-col gap-6;
+    width: 100%;
+    animation: marquee-up var(--duration, 24s) linear infinite;
+  }
+  .testimonial-column:hover .marquee-track {
+    animation-play-state: paused;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+  }
+
+  /* -----------------------------------------------------------------------
+   * Glow card (tarjetas de servicios): halo + anillo que siguen al cursor.
+   * Las variables --x/--y las actualiza main.js en cada pointermove; sin JS
+   * (o en touch) se quedan en el centro y sencillamente no se activan
+   * porque `.is-glowing` nunca se añade.
+   * -------------------------------------------------------------------- */
+  .glow-card {
+    --x: 50%;
+    --y: 50%;
+  }
+  .glow-spot,
+  .glow-ring {
+    @apply pointer-events-none absolute inset-0 z-[5] opacity-0 transition-opacity duration-500 ease-out;
+  }
+  .glow-card.is-glowing .glow-spot,
+  .glow-card.is-glowing .glow-ring {
+    @apply opacity-100;
+  }
+  .glow-spot {
+    background: radial-gradient(480px circle at var(--x) var(--y), rgba(255, 138, 76, 0.28), transparent 62%);
+    mix-blend-mode: screen;
+  }
+  .glow-ring {
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(
+      260px circle at var(--x) var(--y),
+      rgba(255, 200, 120, 0.95),
+      rgba(242, 98, 28, 0.35) 40%,
+      transparent 65%
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    filter: brightness(1.3);
+  }
+  .glow-card .card-content {
+    @apply relative z-10;
+  }
+
+  /* -----------------------------------------------------------------------
+   * Hero shader: luz cálida (ámbar/oro) que sigue el cursor sobre la
+   * textura de tejas. Va DEBAJO del contenido de texto (z-index negativo,
+   * agrupado con el resto de capas decorativas del hero) y usa
+   * mix-blend-mode para iluminar la foto sin tocar el contraste del texto,
+   * que vive en su propia capa por encima. main.js decide si se sigue el
+   * cursor (pointer:fine), se deja un halo estático (touch) o se apaga del
+   * todo (prefers-reduced-motion).
+   * -------------------------------------------------------------------- */
+  #hero-spotlight {
+    --x: 50%;
+    --y: 22%;
+    background: radial-gradient(
+      640px circle at var(--x) var(--y),
+      rgba(255, 215, 140, 0.22),
+      rgba(255, 138, 76, 0.14) 35%,
+      rgba(242, 98, 28, 0.06) 55%,
+      transparent 70%
+    );
+    mix-blend-mode: screen;
   }
 
   .section-eyebrow {

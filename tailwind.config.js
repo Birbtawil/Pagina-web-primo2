@@ -37,6 +37,12 @@ module.exports = {
           600: "#375974",
         },
       },
+      maxWidth: {
+        // 75% del ancho anterior (max-w-7xl = 80rem) para que el contenido
+        // quede centrado en una columna más angosta, con el fondo charcoal
+        // respirando a ambos lados en pantallas grandes.
+        content: "60rem",
+      },
       fontFamily: {
         sans: ["Montserrat", "system-ui", "sans-serif"],
         display: ["Montserrat", "system-ui", "sans-serif"],

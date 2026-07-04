@@ -120,7 +120,13 @@
       <div class="absolute inset-0 -z-10 bg-grain"></div>
       <div class="pointer-events-none absolute -top-40 right-[-10%] -z-10 h-[36rem] w-[36rem] rounded-full bg-ember-600/20 blur-[140px]"></div>
 
-      <div class="mx-auto w-full max-w-7xl px-6 pt-24 lg:px-10">
+      <!-- Shader del hero: luz ámbar/oro que sigue el cursor sobre la textura
+           (main.js). Va con z-index negativo, igual que las otras capas
+           decorativas de arriba, para quedar SIEMPRE debajo del contenido de
+           texto sin necesidad de tocar su z-index. -->
+      <div id="hero-spotlight" class="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-700 ease-out" aria-hidden="true"></div>
+
+      <div class="mx-auto w-full max-w-content px-6 pt-24 lg:px-10">
         <div class="max-w-3xl">
           <p class="reveal section-eyebrow">Colorado Licensed &amp; Insured Roofing Contractor</p>
 
@@ -160,7 +166,7 @@
          3) TRUST BAR & REVIEWS (Social Proof)
          ===================================================================== -->
     <section id="trust" class="relative border-y border-white/[0.06] bg-charcoal-900 py-10">
-      <div class="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-6 sm:grid-cols-4 lg:px-10">
+      <div class="mx-auto grid max-w-content grid-cols-2 gap-6 px-6 sm:grid-cols-4 lg:px-10">
         <div class="reveal flex flex-col items-center gap-2 text-center">
           <svg viewBox="0 0 24 24" class="h-7 w-7 text-ember-500" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4 6v6c0 4.6 3.4 8.3 8 9 4.6-.7 8-4.4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
           <span class="text-xs font-semibold uppercase tracking-wide text-slate-300 sm:text-sm">Licensed &amp; Insured</span>
@@ -181,7 +187,7 @@
     </section>
 
     <section id="reviews" class="relative bg-charcoal-950 py-24 sm:py-32">
-      <div class="mx-auto max-w-7xl px-6 lg:px-10">
+      <div class="mx-auto max-w-content px-6 lg:px-10">
         <div class="reveal mx-auto max-w-2xl text-center">
           <p class="section-eyebrow mx-auto">What Colorado Homeowners Say</p>
           <h2 class="font-display text-3xl font-extrabold text-white sm:text-4xl">Trusted for Quality, Respected for Craft</h2>
@@ -191,72 +197,18 @@
           </p>
         </div>
 
-        <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <!-- Testimonio 1 -->
-          <blockquote class="reveal card-deep flex h-full flex-col p-8">
-            <div class="flex items-center gap-1 text-ember-500" aria-label="5 out of 5 stars">
-              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
-              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
-              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
-              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
-              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
-            </div>
-            <p class="mt-5 flex-1 text-slate-300">
-              &ldquo;From the first inspection to the final walkthrough, the crew was professional, on time,
-              and left our yard spotless. You can tell they take real pride in the work.&rdquo;
-            </p>
-            <footer class="mt-6 flex items-center justify-between border-t border-white/[0.06] pt-4">
-              <div>
-                <p class="font-semibold text-white">Michael R.</p>
-                <p class="text-xs text-slate-500">Colorado Springs, CO</p>
-              </div>
-              <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-slate-300">Yelp</span>
-            </footer>
-          </blockquote>
-
-          <!-- Testimonio 2 -->
-          <blockquote class="reveal card-deep flex h-full flex-col p-8">
-            <div class="flex items-center gap-1 text-ember-500" aria-label="5 out of 5 stars">
-              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
-              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
-              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
-              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
-              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
-            </div>
-            <p class="mt-5 flex-1 text-slate-300">
-              &ldquo;We had hail damage after the spring storms and CG Premier handled the entire insurance
-              process for us. Clear communication every single step of the way.&rdquo;
-            </p>
-            <footer class="mt-6 flex items-center justify-between border-t border-white/[0.06] pt-4">
-              <div>
-                <p class="font-semibold text-white">Sarah T.</p>
-                <p class="text-xs text-slate-500">Colorado Springs, CO</p>
-              </div>
-              <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-slate-300">Nextdoor</span>
-            </footer>
-          </blockquote>
-
-          <!-- Testimonio 3 -->
-          <blockquote class="reveal card-deep flex h-full flex-col p-8 sm:col-span-2 lg:col-span-1">
-            <div class="flex items-center gap-1 text-ember-500" aria-label="5 out of 5 stars">
-              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
-              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
-              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
-              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
-              <svg viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2L4.6 17.8l1.3-6-4.6-4.1 6.1-.6L10 1.5z"/></svg>
-            </div>
-            <p class="mt-5 flex-1 text-slate-300">
-              &ldquo;Fair pricing, quality materials, and a crew that actually showed up when they said
-              they would. Our new roof looks incredible.&rdquo;
-            </p>
-            <footer class="mt-6 flex items-center justify-between border-t border-white/[0.06] pt-4">
-              <div>
-                <p class="font-semibold text-white">David K.</p>
-                <p class="text-xs text-slate-500">Monument, CO</p>
-              </div>
-              <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-slate-300">Yelp</span>
-            </footer>
-          </blockquote>
+        <!-- Las 9 reseñas viven como datos en js/main.js (TESTIMONIALS) y se
+             renderizan aquí en 3 columnas verticales en bucle infinito
+             (marquee CSS, sin framer-motion). Cada columna duplica su set de
+             3 tarjetas para que el loop sea perfectamente continuo. El
+             degradado de máscara (mask-image) difumina el borde superior e
+             inferior; el hover pausa la columna para poder leer con calma. -->
+        <div class="reveal testimonial-mask relative mt-14 max-h-[46rem] overflow-hidden">
+          <div id="testimonials-columns" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="testimonial-column" data-column="0" data-duration="24"></div>
+            <div class="testimonial-column hidden sm:block" data-column="1" data-duration="29"></div>
+            <div class="testimonial-column hidden lg:block" data-column="2" data-duration="21"></div>
+          </div>
         </div>
 
         <div class="reveal mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -278,7 +230,7 @@
          (ver data-service y main.js).
          ===================================================================== -->
     <section id="services" class="relative bg-charcoal-900 py-24 sm:py-32">
-      <div class="mx-auto max-w-7xl px-6 lg:px-10">
+      <div class="mx-auto max-w-content px-6 lg:px-10">
         <div class="reveal mx-auto max-w-2xl text-center">
           <p class="section-eyebrow mx-auto">What We Do</p>
           <h2 class="font-display text-3xl font-extrabold text-white sm:text-4xl">Built to Withstand Colorado Weather</h2>
@@ -291,10 +243,10 @@
         <div class="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
           <!-- Tarjeta destacada — assets/img/image_574046.png (techo azul en construcción) -->
-          <article class="reveal card-deep group relative flex min-h-[22rem] flex-col justify-end overflow-hidden lg:col-span-2">
+          <article class="reveal glow-card card-deep group relative flex min-h-[22rem] flex-col justify-end overflow-hidden lg:col-span-2">
             <img src="assets/img/image_574046.png" alt="New roof installation in progress on a Colorado home" class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy" />
             <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/50 to-transparent"></div>
-            <div class="relative p-8">
+            <div class="card-content p-8">
               <span class="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-ember-500/90 text-white shadow-glow">
                 <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M6 10.5V20h12v-9.5"/></svg>
               </span>
@@ -308,10 +260,10 @@
           </article>
 
           <!-- assets/img/image_57409f.png (techo metálico rojo) -->
-          <article class="reveal card-deep group relative flex min-h-[22rem] flex-col justify-end overflow-hidden">
+          <article class="reveal glow-card card-deep group relative flex min-h-[22rem] flex-col justify-end overflow-hidden">
             <img src="assets/img/image_57409f.png" alt="Standing-seam red metal roof detail" class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy" />
             <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/50 to-transparent"></div>
-            <div class="relative p-8">
+            <div class="card-content p-8">
               <span class="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-ember-500/90 text-white shadow-glow">
                 <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17V9l8-5 8 5v8M4 17l8 5 8-5M4 17l8-5 8 5"/></svg>
               </span>
@@ -325,10 +277,10 @@
           </article>
 
           <!-- assets/img/image_574023.png (instalación de canaletas) -->
-          <article class="reveal card-deep group relative flex min-h-[22rem] flex-col justify-end overflow-hidden">
+          <article class="reveal glow-card card-deep group relative flex min-h-[22rem] flex-col justify-end overflow-hidden">
             <img src="assets/img/image_574023.png" alt="Seamless gutter installation along a roofline" class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy" />
             <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/50 to-transparent"></div>
-            <div class="relative p-8">
+            <div class="card-content p-8">
               <span class="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-ember-500/90 text-white shadow-glow">
                 <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M6 6v14h4V6M14 6v14h4V6"/></svg>
               </span>
@@ -342,10 +294,10 @@
           </article>
 
           <!-- assets/img/image_57407f.png (trabajador en techo de madera) -->
-          <article class="reveal card-deep group relative flex min-h-[22rem] flex-col justify-end overflow-hidden">
+          <article class="reveal glow-card card-deep group relative flex min-h-[22rem] flex-col justify-end overflow-hidden">
             <img src="assets/img/image_57407f.png" alt="Roofing technician working on wood roof decking" class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy" />
             <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/50 to-transparent"></div>
-            <div class="relative p-8">
+            <div class="card-content p-8">
               <span class="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-ember-500/90 text-white shadow-glow">
                 <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0-1.4 0l-6 6a1 1 0 0 0 0 1.4l3 3a1 1 0 0 0 1.4 0l6-6a1 1 0 0 0 0-1.4l-3-3Z"/><path d="m9 15-4 4M5 19H3v-2"/></svg>
               </span>
@@ -359,9 +311,9 @@
           </article>
 
           <!-- Sin foto asignada por el cliente: tarjeta de icono con degradado de marca -->
-          <article class="reveal card-deep group relative flex min-h-[22rem] flex-col justify-end overflow-hidden bg-gradient-to-br from-charcoal-700 to-charcoal-800">
+          <article class="reveal glow-card card-deep group relative flex min-h-[22rem] flex-col justify-end overflow-hidden bg-gradient-to-br from-charcoal-700 to-charcoal-800">
             <div class="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-steel-500/20 blur-3xl transition-all duration-700 group-hover:bg-ember-500/20"></div>
-            <div class="relative p-8">
+            <div class="card-content p-8">
               <span class="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-steel-300">
                 <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15a4 4 0 0 1 4-4 5 5 0 0 1 9.6-1.5A4.5 4.5 0 0 1 20 18H6a3 3 0 0 1-3-3Z"/><path d="M13 13l-2 3h3l-2 3"/></svg>
               </span>
@@ -375,8 +327,8 @@
           </article>
 
           <!-- Banner ancho — Commercial Roofing (sin foto asignada) -->
-          <article class="reveal card-deep group relative flex min-h-[11rem] flex-col justify-center overflow-hidden bg-gradient-to-r from-charcoal-800 via-charcoal-800 to-steel-600/30 lg:col-span-3">
-            <div class="relative flex flex-col items-start justify-between gap-6 p-8 sm:flex-row sm:items-center">
+          <article class="reveal glow-card card-deep group relative flex min-h-[11rem] flex-col justify-center overflow-hidden bg-gradient-to-r from-charcoal-800 via-charcoal-800 to-steel-600/30 lg:col-span-3">
+            <div class="card-content flex flex-col items-start justify-between gap-6 p-8 sm:flex-row sm:items-center">
               <div class="flex items-center gap-5">
                 <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-white/10 text-steel-300">
                   <svg viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M6 21V6l6-3 6 3v15M9 21v-5h6v5M9 10h.01M9 13h.01M15 10h.01M15 13h.01"/></svg>
@@ -405,7 +357,7 @@
     <section id="quote" class="relative isolate overflow-hidden bg-charcoal-950 py-24 sm:py-32">
       <div class="pointer-events-none absolute left-1/2 top-0 -z-10 h-[40rem] w-[60rem] -translate-x-1/2 rounded-full bg-ember-600/10 blur-[160px]"></div>
 
-      <div class="relative mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 lg:grid-cols-5 lg:px-10">
+      <div class="relative mx-auto grid max-w-content grid-cols-1 gap-12 px-6 lg:grid-cols-5 lg:px-10">
 
         <!-- Columna informativa -->
         <div class="reveal lg:col-span-2">
@@ -573,7 +525,7 @@
        6) GLOBAL FOOTER & DATA POLICY
        ========================================================================= -->
   <footer class="border-t border-white/[0.06] bg-charcoal-950">
-    <div class="mx-auto max-w-7xl px-6 py-16 lg:px-10">
+    <div class="mx-auto max-w-content px-6 py-16 lg:px-10">
       <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
 
         <div>
